@@ -1,0 +1,6 @@
+version: '3'
+services:
+  queryapi:
+    build: .
+    image: queryapi
+    
