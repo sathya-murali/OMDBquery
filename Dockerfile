@@ -1,21 +1,25 @@
-FROM ubuntu:14.04
-COPY queryOMDBAPI.groovy $HOME 
-RUN sudo apt-get -y update
+FROM ubuntu:19.04
+COPY queryOMDBAPI.groovy $HOME/
+RUN apt-get -y update
 RUN apt-get -y install wget unzip && \
-RUN apt-get clean
-RUN cd /tmp && \
-    wget --no-check-certificate http://www.java.net/download/jdk8u40/archive/b15/binaries/jdk-8u40-ea-bin-b15-linux-x64-18_nov_2014.tar.gz && \
-    tar xzf jdk-8u40-ea-bin-b15-linux-x64-18_nov_2014.tar.gz && \
-    mv jdk1.8.0_40 /jdk && \
-    rm -f jdk-8u40-ea-bin-b15-linux-x64-18_nov_2014.tar.gz
+    apt-get clean && \
+    cd /tmp
+RUN \
+  apt-get -y update && \
+  apt-get -y install default-jre && \
+  apt-get -y install default-jdk && \
+  ln -s /usr/lib/jvm/java-11-openjdk-amd64 /usr/src/java7 && \
+  rm -rf /var/lib/apt/lists/* && \
+  rm -rf /var/cache/oracle-jdk8-installer && \
+  java --version
 
 RUN cd /tmp && \
-    wget http://dl.bintray.com/groovy/maven/groovy-binary-2.4.0-beta-4.zip && \
-    unzip groovy-binary-2.4.0-beta-4.zip && \
-    mv groovy-2.4.0-beta-4 /groovy && \
-    rm groovy-binary-2.4.0-beta-4.zip
+    wget http://dl.bintray.com/groovy/maven/apache-groovy-binary-2.5.7.zip && \
+    unzip apache-groovy-binary-2.5.7.zip && \
+    mv groovy-2.5.7 /usr/src/groovy && \
+    rm apache-groovy-binary-2.5.7.zip
 
-ENV JAVA_HOME /jdk
-ENV GROOVY_HOME /groovy
+ENV JAVA_HOME /usr/src/java7
+ENV GROOVY_HOME /usr/src/groovy
 ENV PATH $GROOVY_HOME/bin/:$PATH
-RUN groovy $HOME/queryOMDBAPI.groovy
+CMD groovy ./queryOMDBAPI.groovy
