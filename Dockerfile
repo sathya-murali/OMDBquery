@@ -22,4 +22,3 @@ RUN cd /tmp && \
 ENV JAVA_HOME /usr/src/java7
 ENV GROOVY_HOME /usr/src/groovy
 ENV PATH $GROOVY_HOME/bin/:$PATH
-CMD groovy ./queryOMDBAPI.groovy
