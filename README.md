@@ -1,18 +1,22 @@
-About this Repo
-This repository is for running OMDB API query to get Movie Details. This Query returns in JSon format.
+**About this Repo**
 
-How to Use this Project: Run dockerfile which would create the docker image. This image would contain the code to run API query.
-How to Run the application:
+**This repository is for running OMDB API query to get Movie Details. This Query returns in JSon format.**
 
-Usage: 
-Run command docker-compose run queryapi groovy ./queryOMDBAPI.groovy bash
-    This would create image with Name "queryapi"
+**How to Use this Project:** 
+Run dockerfile which would create the docker image. This image would contain the code to run API query.
 
-Provide the Movie name you wanted to fetch. The movie details would be returned in JSon format.
-You do need to prvide the complete name, as long the you provide near match you would get results as below.
+**How to Run the application:**
 
-Example Below
+**Usage:** 
+- Run command docker-compose run queryapi groovy ./queryOMDBAPI.groovy bash
+- This would create image with Name "queryapi"
+- Provide the Movie name you wanted to fetch. The movie details would be returned in JSon format.
+- You do need to provide the complete name, as long the you provide near match you would get results as below.
 
+*Example Below*
+
+
+```json
 Please input Movie Name to Query
 avengers infinity
 Running Query for avengers infinity
@@ -56,3 +60,5 @@ STDOUT {
     "Website": "http://marvel.com/movies/movie/223/avengers_infinity_war",
     "Response": "True"
 }
+```
+
